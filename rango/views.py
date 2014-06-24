@@ -1,6 +1,7 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from rango.models import Category, Page
+from rango.utils import encode, decode
 
 def index(request):
     context = RequestContext(request)
@@ -10,7 +11,7 @@ def index(request):
                     'pages': page_list}
 
     for category in category_list:
-        category.url = category.name.replace(' ', '_')
+        category.url = encode(category.name)
 
     return render_to_response('rango/index.html', context_dict, context)
 
@@ -20,7 +21,7 @@ def about(request):
 
 def category(request, category_name_url):
     context = RequestContext(request)
-    category_name = category_name_url.replace('_', ' ')
+    category_name = decode(category_name_url)
     context_dict = {'category_name': category_name}
 
     try:
