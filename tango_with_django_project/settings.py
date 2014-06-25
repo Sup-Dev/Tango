@@ -100,6 +100,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/rango/login/'
+
 TEMPLATE_DIRS = (
     TEMPLATE_PATH,
 )
