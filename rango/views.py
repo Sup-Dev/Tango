@@ -17,6 +17,9 @@ def index(request):
     context_dict = {'categories': category_list,
                     'pages': page_list}
 
+    cat_list = get_category_list()
+    context_dict['cat_list'] = cat_list
+
     for category in category_list:
         category.url = encode(category.name)
 
@@ -173,3 +176,11 @@ def search(request):
             result_list = run_query(query)
 
     return render_to_response('rango/search.html', {'result_list': result_list}, context)
+
+def get_category_list():
+    cat_list = Category.objects.all()
+
+    for cat in cat_list:
+        cat.url = encode(cat.name)
+
+    return cat_list
