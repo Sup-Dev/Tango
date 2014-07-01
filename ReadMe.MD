@@ -1,0 +1,1 @@
+A basic Python-Django based project that sorts and arranges web pages by categories.
